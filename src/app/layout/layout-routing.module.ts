@@ -2,7 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 
-const routes: Routes = [{ path: '', component: LayoutComponent }];
+const routes: Routes = [
+  {
+    path: '', component: LayoutComponent, children:
+      [
+        {path:'',redirectTo:'pokemons'},
+        { path: 'pokemons', loadChildren: () => import('../pages/pokemons/pokemons.module').then(m => m.PokemonsModule) }
+      ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
